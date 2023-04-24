@@ -21,7 +21,6 @@ const moviesController = {
     db.Movie.findByPk(req.params.id, {
       include: ["genre", "actors"],
     }).then((movie) => {
-      //return res.send(movie)
       res.render("moviesDetail.ejs", { movie });
     });
   },
@@ -43,7 +42,6 @@ const moviesController = {
       res.render("recommendedMovies.ejs", { movies });
     });
   },
-  //Aqui dispongo las rutas para trabajar con el CRUD
   add: function (req, res) {
     db.Genre.findAll()
     
@@ -75,9 +73,8 @@ const moviesController = {
 
     const allGenres = db.Genre.findAll();
 
-    Promise.all([movie, allGenres]) // El array debe ser el mismo orden
+    Promise.all([movie, allGenres]) 
       .then(([movie, allGenres]) => {
-        // El array debe ser el mismo orden
         return res.render("moviesEdit", {
           Movie: {
             ...movie.dataValues,
@@ -89,7 +86,6 @@ const moviesController = {
       .catch((error) => console.log(error));
   },
   update: function (req, res) {
-    //return res.send(req.body)
 
     db.Movie.update(
       {
